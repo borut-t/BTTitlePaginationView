@@ -6,7 +6,8 @@ Pod::Spec.new do |s|
   s.license      = { :type => 'zlib', :file => 'LICENCE.md' }
   s.author       = 'Borut Tomažin'
   s.platform     = :ios, '5.0'
-  s.source       = { :git => 'https://github.com/borut-t/BTTitlePaginationView.git', :tag => '#{s.version}' }
+  s.source       = { :git => 'https://github.com/borut-t/BTTitlePaginationView.git', :tag => '1.0' }
   s.source_files = 'BTTitlePaginationView/BTTitlePaginationView.{h,m}'
   s.frameworks   = 'UIKit'
   s.requires_arc = true
+end
