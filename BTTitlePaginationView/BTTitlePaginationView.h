@@ -9,7 +9,7 @@
 //  Distributed under the permissive zlib License
 //  Get the latest version from here:
 //
-//  https://github.com/borut-t/BTStoreView
+//  https://github.com/borut-t/BTTitlePaginationView
 //
 //  This software is provided 'as-is', without any express or implied
 //  warranty.  In no event will the authors be held liable for any damages
@@ -60,12 +60,12 @@
 @property (nonatomic, assign) CGFloat fadeOutSpeed;
 
 /**
- Pagination indicator tintColor (only iOS 7.0+).
+ Pagination indicator tintColor (iOS 7.0+ only).
  */
 @property (nonatomic, strong) UIColor *indicatorTintColor;
 
 /**
- Pagination current indicator tintColor (only iOS 7.0+).
+ Pagination current indicator tintColor (iOS 7.0+ only).
  */
 @property (nonatomic, strong) UIColor *currentIndicatorTintColor;
 
