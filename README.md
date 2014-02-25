@@ -38,8 +38,8 @@ Fade out speed (default 1.2).
 
 	@property (nonatomic, strong) UIColor *indicatorTintColor;
 
-Pagination indicator tintColor (only iOS 7.0+).
+Pagination indicator tintColor (iOS 7.0+ only).
 
 	@property (nonatomic, strong) UIColor *currentIndicatorTintColor;
 
-Pagination current indicator tintColor (only iOS 7.0+).
+Pagination current indicator tintColor (iOS 7.0+ only).
