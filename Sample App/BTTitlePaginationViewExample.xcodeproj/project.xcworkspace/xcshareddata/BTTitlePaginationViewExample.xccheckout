@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>58B39F27-2087-4D9B-814F-BD12B6AEF874</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BTTitlePaginationViewExample</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F65328D6-4C61-4B23-85D8-1445A332EB9E</key>
+		<string>https://github.com/borut-t/BTTitlePaginationView.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Sample App/BTTitlePaginationViewExample.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F65328D6-4C61-4B23-85D8-1445A332EB9E</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/borut-t/BTTitlePaginationView.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F65328D6-4C61-4B23-85D8-1445A332EB9E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F65328D6-4C61-4B23-85D8-1445A332EB9E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BTTitlePaginationView</string>
+		</dict>
+	</array>
+</dict>
+</plist>
