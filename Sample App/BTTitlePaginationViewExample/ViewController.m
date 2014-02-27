@@ -24,34 +24,48 @@
 	// Do any additional setup after loading the view, typically from a nib.
     
     self.titlePaginationView = [[BTTitlePaginationView alloc] initWithFrame:CGRectMake(0.f, 0.f, 140.f, 44.f)];
-    self.titlePaginationView.items = @[@"Page 1", @"Page 2", @"Page 3"];
-    self.titlePaginationView.fadeInSpeed = 0.8f;
+    self.titlePaginationView.items = @[@"Page 1", @"Page 2", @"Page 3", @"Page 4", @"Page 5"];
     self.titlePaginationView.currentPage = 0;
-    
-    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.frame) * 3, 0);
-    
-    UILabel *label1 = [[UILabel alloc] initWithFrame:CGRectMake(10.f, 100.f, 300.f, 30.f)];
-    label1.text = @"Page 1";
-    label1.textAlignment = UITextAlignmentCenter;
-    [self.scrollView addSubview:label1];
-    
-    UILabel *label2 = [[UILabel alloc] initWithFrame:CGRectMake(330.f, 100.f, 300.f, 30.f)];
-    label2.text = @"Page 2";
-    label2.textAlignment = UITextAlignmentCenter;
-    [self.scrollView addSubview:label2];
-    
-    UILabel *label3 = [[UILabel alloc] initWithFrame:CGRectMake(650.f, 100.f, 300.f, 30.f)];
-    label3.text = @"Page 3";
-    label3.textAlignment = UITextAlignmentCenter;
-    [self.scrollView addSubview:label3];
-    
     self.navigationItem.titleView = self.titlePaginationView;
+    
+    [self layoutItems];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [self layoutItems];
+}
+
+
+#pragma mark - Custom methods
+- (void)layoutItems
+{
+    int index = 0;
+    for (NSString *item in self.titlePaginationView.items) {
+        if ([self.scrollView viewWithTag:10+index] == nil) {
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+            label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+            label.text = item;
+            label.tag = 10+index;
+            label.textAlignment = UITextAlignmentCenter;
+            [self.scrollView addSubview:label];
+        }
+        
+        [(UILabel *)[self.scrollView viewWithTag:10+index] setFrame:CGRectMake(CGRectGetWidth(self.view.frame)*index,
+                                                                               100.f,
+                                                                               CGRectGetWidth(self.view.frame),
+                                                                               30.f)];
+        
+        index++;
+    }
+    
+    self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.view.frame) * self.titlePaginationView.items.count, 0);
 }
 
 
