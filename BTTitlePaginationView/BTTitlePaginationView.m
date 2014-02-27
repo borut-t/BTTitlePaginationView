@@ -1,7 +1,7 @@
 //
 //  BTTitlePaginationView.m
 //
-//  Version 1.0
+//  Version 1.0.1
 //
 //  Created by Borut Tomazin on 2/25/2014.
 //  Copyright 2014 Borut Tomazin
@@ -43,6 +43,7 @@ CGFloat const ITEMS_HEIGHT = 20.f;
 @property (nonatomic, strong) UIView *itemsContainerView;
 
 @property (nonatomic, assign) CGFloat previousOffset;
+@property (nonatomic, assign) NSInteger startDirection;
 
 @end
 
@@ -77,8 +78,7 @@ CGFloat const ITEMS_HEIGHT = 20.f;
     [self setCurrentIndicatorTintColor:[UIColor whiteColor]];
     [self addSubview:self.pageControl];
     
-    self.fadeInSpeed = 0.5f;
-    self.fadeOutSpeed = 1.2f;
+    self.startDirection = 0;
     
     self.clipsToBounds = YES;
 }
@@ -136,32 +136,42 @@ CGFloat const ITEMS_HEIGHT = 20.f;
 {
     _currentPage = currentPage;
     self.pageControl.currentPage = _currentPage;
+    self.startDirection = 0;
     
-    [self setItemAlpha:1.f atIndex:self.currentPage];
-    if (self.currentPage-1 > 0) {
-        [self setItemAlpha:0.f atIndex:self.currentPage-1];
+    [self setItemAlpha:1.f atIndex:_currentPage];
+    if (_currentPage-1 > 0) {
+        [self setItemAlpha:0.f atIndex:_currentPage-1];
     }
-    if (self.currentPage+1 < self.items.count) {
-        [self setItemAlpha:0.f atIndex:self.currentPage+1];
+    if (_currentPage+1 < self.items.count) {
+        [self setItemAlpha:0.f atIndex:_currentPage+1];
     }
 }
 
 - (void)setOffset:(CGFloat)offset
 {
-    _offset = (offset - _previousOffset)/2.f * CGRectGetWidth(self.frame)/160.f;
-    _previousOffset = offset;
+    if (offset == 0) {
+        return;
+    }
+    
+    _offset = (offset - self.previousOffset)/2.f * CGRectGetWidth(self.frame)/(CGRectGetWidth(self.superview.frame)/2);
+    self.previousOffset = offset;
+    
+    if (self.startDirection == 0) {
+        self.startDirection = _offset > 0 ? 1 : -1;
+    }
+    NSInteger currentDirection = _offset > 0 ? 1 : -1;
     
     CGRect itemsContainerFrame = self.itemsContainerView.frame;
     itemsContainerFrame.origin.x -= _offset;
     self.itemsContainerView.frame = itemsContainerFrame;
     
-    CGFloat containerOffsetX = itemsContainerFrame.origin.x*-1.f;
+    CGFloat containerOffsetX = itemsContainerFrame.origin.x * -1.f;
     if (containerOffsetX <= 0.f || containerOffsetX >= CGRectGetWidth(self.frame)*(self.items.count-1)) {
         return;
     }
     
     //current page
-    CGFloat velocityCurrent = fabs(_offset/100.f * self.fadeOutSpeed);
+    CGFloat velocityCurrent = fabs(_offset/100) * (self.startDirection != currentDirection ? -1 : 1);
     UILabel *currentItemLabel = [self itemAtIndex:self.currentPage];
     CGFloat currentItemLabelAlpha = currentItemLabel.alpha - velocityCurrent;
     if (currentItemLabelAlpha >= 0.f && currentItemLabelAlpha <= 1.f) {
@@ -169,8 +179,13 @@ CGFloat const ITEMS_HEIGHT = 20.f;
     }
     
     //next/previous page
-    CGFloat velocityNext = fabs(_offset/100.f * self.fadeInSpeed);
-    UILabel *nextItemLabel = [self itemAtIndex:self.currentPage+(_offset > 0.f ? 1 : -1)];
+    CGFloat velocityNext = fabs(_offset/100);
+    NSInteger nextPageIndex = self.currentPage + (_offset > 0.f ? 1 : -1);
+    if (self.startDirection != currentDirection) {
+        velocityNext *= -1;
+        nextPageIndex = self.currentPage + (_offset*-1.f > 0.f ? 1 : -1);
+    }
+    UILabel *nextItemLabel = [self itemAtIndex:nextPageIndex];
     CGFloat nextItemLabelAlpha = nextItemLabel.alpha + velocityNext;
     if (nextItemLabelAlpha >= 0.f && nextItemLabelAlpha <= 1.f) {
         nextItemLabel.alpha = nextItemLabelAlpha;

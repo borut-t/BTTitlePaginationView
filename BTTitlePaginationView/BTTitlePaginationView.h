@@ -1,7 +1,7 @@
 //
 //  BTTitlePaginationView.h
 //
-//  Version 1.0
+//  Version 1.0.1
 //
 //  Created by Borut Tomazin on 2/25/2014.
 //  Copyright 2014 Borut Tomazin
@@ -48,16 +48,6 @@
  Pagination items array.
  */
 @property (nonatomic, copy) NSArray *items;
-
-/**
- Fade in speed (default 0.5).
- */
-@property (nonatomic, assign) CGFloat fadeInSpeed;
-
-/**
- Fade out speed (default 1.2).
- */
-@property (nonatomic, assign) CGFloat fadeOutSpeed;
 
 /**
  Pagination indicator tintColor (iOS 7.0+ only).
