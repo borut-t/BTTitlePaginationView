@@ -28,14 +28,6 @@ Scrolling offset retrieved from scrollView's property contentOffset.x
 
 Pagination items array.
 
-	@property (nonatomic, assign) CGFloat fadeInSpeed;
-
-Fade in speed (default 0.5).
-
-	@property (nonatomic, assign) CGFloat fadeOutSpeed;
-
-Fade out speed (default 1.2).
-
 	@property (nonatomic, strong) UIColor *indicatorTintColor;
 
 Pagination indicator tintColor (iOS 7.0+ only).
